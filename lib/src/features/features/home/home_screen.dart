@@ -33,6 +33,9 @@ class HomeScreen extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: margin_10),
           children: [
+            CustomDivider(
+              height: height_20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -44,7 +47,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             CustomDivider(
-              height: height_30,
+              height: height_10,
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: margin_10, horizontal: margin_5),

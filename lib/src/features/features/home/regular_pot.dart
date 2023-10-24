@@ -22,17 +22,20 @@ class RegularPotScreen extends StatelessWidget {
       backgroundColor: AppColors.blue,
       appBar: CustomAppbar(
         appBar: AppBar(),
-        title: strSelectPot,
+        title: strBack,
         color: AppColors.white,
         containerColor: AppColors.transparent,
         showSuffix: true,
+        suffixPress: () {},
         icon: Icons.notifications,
-        dontShowBackButton: true,
       ),
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: margin_10),
           children: [
+            CustomDivider(
+              height: height_20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -45,7 +48,7 @@ class RegularPotScreen extends StatelessWidget {
               ],
             ),
             CustomDivider(
-              height: height_30,
+              height: height_10,
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: margin_10, horizontal: margin_5),

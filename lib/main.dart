@@ -1,11 +1,10 @@
 import 'package:bet_app/src/core/config/routes.dart';
 import 'package:bet_app/src/core/constants/palette.dart';
+import 'package:bet_app/src/features/auth/login/login_binding.dart';
 import 'package:bet_app/src/features/auth/login/login_screen.dart';
 import 'package:bet_app/src/features/features/home/home_screen.dart';
 import 'package:bet_app/src/features/features/nav_bar/nav_bar_screen.dart';
 import 'package:bet_app/src/prc.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/smart_management.dart';
@@ -45,9 +44,9 @@ class MyApp extends StatelessWidget {
             ),
             debugShowCheckedModeBanner: false,
             smartManagement: SmartManagement.full,
-            home: LoginScreen(),
-            // initialRoute: AppRoutes.getHomeRoute(),
-            // initialBinding:  HomeBinding(),
+            //home: LoginScreen(),
+            initialRoute: AppRoutes.getLoginRoute(),
+            initialBinding:  LoginBinding(),
             // initialRoute: AppRoutes.getAddOrderOneRoute(),
             // initialBinding: AddOrderBinding(),
             getPages: AppRoutes.getPages(),

@@ -11,10 +11,17 @@ import 'package:bet_app/src/core/constants/strings.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constants/palette.dart';
 
-class SelectAmount extends StatelessWidget {
-  SelectAmount({super.key});
+class SelectAmount extends StatefulWidget {
+  const SelectAmount({super.key});
 
-  final List<String> items = ['1', '2', '10', '50'];
+  @override
+  State<SelectAmount> createState() => _SelectAmountState();
+}
+
+class _SelectAmountState extends State<SelectAmount> {
+
+  final List<String> items = ['1', '5', '10', '50', '100', '500', '1000'];
+  final TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +64,7 @@ class SelectAmount extends StatelessWidget {
                     width: width_270,
                     child: CustomTextField(
                         labelText: 'Enter Amount',
+                        controller: textController,
                         prefixIcon: null,
                         lines: 1,
                         obscure: false,
@@ -64,35 +72,39 @@ class SelectAmount extends StatelessWidget {
                         textInputType: TextInputType.text)),
               ],
             ),
-            SizedBox(
+            Container(
               height: height_400,
               width: 200,
-              child: GridView(
+              child: GridView.builder(
                 padding: EdgeInsets.symmetric(horizontal: margin_3),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // Number of columns in the grid
-                  crossAxisSpacing: margin_15, // Spacing between columns
-                  mainAxisSpacing: margin_15, // Spacing between rows
-                  childAspectRatio: 2
-                ),
-                children: [
-                  for(int i=1; i<20; i++)
-              InkWell(
-                onTap: (){
-                  print('\$RS');
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(radius_25)),
-                  child: Text(
-                    '\$50',
-                    style: TextStyle(fontSize: 20.0),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // Number of columns in the grid
+                      crossAxisSpacing: margin_15, // Spacing between columns
+                      mainAxisSpacing: margin_15, // Spacing between rows
+                      childAspectRatio: 2
                   ),
-                ),
-              )
-                ],
+                shrinkWrap: true,
+                itemCount: items.length,
+                itemBuilder: (context, index){
+                  return InkWell(
+                    onTap: (){
+                      setState(() {
+                        textController.text = items[index];
+                      });
+                      print('\$RS');
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(radius_25)),
+                      child: Text(
+                        '\$ ${items[index]}',
+                        style: TextStyle(fontSize: 20.0),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             Column(
@@ -115,4 +127,6 @@ class SelectAmount extends StatelessWidget {
       ),
     );
   }
+
 }
+

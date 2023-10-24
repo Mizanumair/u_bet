@@ -8,11 +8,24 @@ import 'package:bet_app/src/components/custom_textfield.dart';
 import 'package:bet_app/src/core/constants/dimensions.dart';
 import 'package:bet_app/src/core/constants/font_weight.dart';
 import 'package:bet_app/src/core/constants/strings.dart';
+import 'package:bet_app/src/features/features/selected_pot/selected_pot.dart';
 import 'package:flutter/material.dart';
 import '../../../core/constants/palette.dart';
 
-class SelectNumber extends StatelessWidget {
+class SelectNumber extends StatefulWidget {
   const SelectNumber({super.key});
+
+  @override
+  State<SelectNumber> createState() => _SelectNumberState();
+}
+
+class _SelectNumberState extends State<SelectNumber> {
+
+
+  final List<String> items =
+      List.generate(99, (index) => (index + 1).toString());
+  String selectedNumber = "";
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,61 +41,75 @@ class SelectNumber extends StatelessWidget {
         icon: Icons.notifications,
       ),
       body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: margin_10),
-          children: [
-            CustomDivider(
-              height: height_20,
-            ),
-
-            SizedBox(
-              height: height_500,
-              width: 200,
-              child: GridView(
-                padding: EdgeInsets.symmetric(horizontal: margin_3),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, // Number of columns in the grid
-                    crossAxisSpacing: margin_15, // Spacing between columns
-                    mainAxisSpacing: margin_15, // Spacing between rows
-                    childAspectRatio: 2
-                ),
+        child: ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: margin_10),
+            itemCount: 1,
+            itemBuilder: (context, index) {
+              return Column(
                 children: [
-                  for(int i=1; i<60; i++)
-                    InkWell(
-                      onTap: (){
-                        print('\$RS');
+                  CustomDivider(
+                    height: height_20,
+                  ),
+                  Container(
+                    height: height_500,
+                    width: MediaQuery.of(context).size.width*.9,
+                    child: GridView.builder(
+                      padding: EdgeInsets.symmetric(horizontal: margin_3),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3, // Number of columns in the grid
+                          crossAxisSpacing:
+                              margin_15, // Spacing between columns
+                          mainAxisSpacing: margin_15, // Spacing between rows
+                          childAspectRatio: 2),
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            print('${items[index]}');
+                            setState(() {
+                              selectedNumber = items[index];
+                            });
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(radius_25)),
+                            child: Text(
+                              '${items[index]}',
+                              style: TextStyle(fontSize: 20.0),
+                            ),
+                          ),
+                        );
                       },
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.circular(radius_25)),
-                        child: Text(
-                          '\$50',
-                          style: TextStyle(fontSize: 20.0),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 250,
+                    child: Column(
+                      children: [
+                        CustomButton(
+                          width: width_200,
+                          text: 'Select Number',
+                          color: AppColors.darkBlue,
+                          fontWeight: fontWeight800,
+                          font: font_20,
+                          onPress: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    SelectedPot(selectedItem: selectedNumber),
+                              ),
+                            );
+                          },
                         ),
-                      ),
-                    )
+                      ],
+                    ),
+                  ),
                 ],
-              ),
-            ),
-            Column(
-              children: [
-                // CustomDivider(
-                //   height: height_30,
-                // ),
-                CustomButton(
-                  width: width_200,
-                  text: strSelectAmount,
-                  color: AppColors.darkBlue,
-                  fontWeight: fontWeight800,
-                  font: font_20,
-                  onPress: (){},
-                ),
-              ],
-            ),
-          ],
-        ),
+              );
+            }),
       ),
     );
   }

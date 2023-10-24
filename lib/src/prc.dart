@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -13,7 +13,7 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
 
   final phoneNumberController = TextEditingController();
   bool loading = false;
-  final auth = FirebaseAuth.instance;
+
 
 
   @override
@@ -45,16 +45,6 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           ),
           ElevatedButton(onPressed: () {
 
-            auth.verifyPhoneNumber(
-                phoneNumber: '+${phoneNumberController.text}',
-                verificationCompleted: (_){},
-                verificationFailed: (e){
-
-                },
-                codeSent: (String verification, int? token){
-
-                },
-                codeAutoRetrievalTimeout: (e){});
 
           }, child: Text('Submit'))
         ],

@@ -1,6 +1,7 @@
 import 'package:bet_app/src/components/custom_button.dart';
 import 'package:bet_app/src/components/custom_divider.dart';
 import 'package:bet_app/src/core/constants/assets.dart';
+import 'package:bet_app/src/features/features/nav_bar/nav_bar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -11,8 +12,24 @@ import '../../../core/constants/font_weight.dart';
 import '../../../core/constants/palette.dart';
 import '../../../core/constants/strings.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+
+
+  bool _obscureText = true;
+
+  void _toggleVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+      print('object');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,30 +65,35 @@ class LoginScreen extends StatelessWidget {
                           textInputType: TextInputType.text),
                       CustomTextField(
                           labelText: strPassword,
+                          lines: 1,
                           prefixIcon: null,
                           hintText: strPassword,
                           suffixIcon: IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.remove_red_eye),
-                            color: AppColors.darkBlue,
+                            icon: Icon(
+                              _obscureText ? Icons.visibility : Icons.visibility_off,
+                              color: Colors.grey,
+                            ),
+                            onPressed: _toggleVisibility,
                           ),
-                          obscure: false,
+                          obscure: _obscureText,
                           height: height_50,
                           textInputType: TextInputType.text),
                       CustomButton(
                         width: width_270,
-                          text: strLogin,
-                          color: AppColors.white,
-                          fontWeight: fontWeight600,
-                          font: font_18,
+                        text: strLogin,
+                        color: AppColors.white,
+                        fontWeight: fontWeight600,
+                        font: font_18,
                         buttonRadius: true,
                         buttonColor: AppColors.pink,
+                        onPress: (){
+                          Get.to(CustomNavBar());
+                        },
                       ),
 
                     ],
                   ),
                 ),
-
               ],
             ),
             CustomDivider(
@@ -87,3 +109,4 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+

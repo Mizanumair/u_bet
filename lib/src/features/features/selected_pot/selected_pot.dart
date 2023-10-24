@@ -18,7 +18,10 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../core/constants/palette.dart';
 
 class SelectedPot extends StatelessWidget {
-  const SelectedPot({super.key});
+   SelectedPot({Key?key,
+     this.selectedItem}):super(key: key);
+
+  final String? selectedItem;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +57,7 @@ class SelectedPot extends StatelessWidget {
                   },
                 ),
                 CustomContainer(
-                  text: strNo,
+                  text: '${strNo} ${selectedItem??''}',
                   hor: margin_40,
                   ver: margin_15,
                   col: AppColors.darkBlue,
