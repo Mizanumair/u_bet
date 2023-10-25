@@ -15,10 +15,17 @@ import 'package:bet_app/src/features/features/selected_pot/select_number.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:share/share.dart';
 import '../../../core/constants/palette.dart';
 
 class ConfirmSale extends StatelessWidget {
   const ConfirmSale({super.key});
+
+  void shareContent() {
+    final text = 'Check out this awesome app!';
+
+    Share.share(text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +103,9 @@ class ConfirmSale extends StatelessWidget {
                               width: width_10,
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  shareContent();
+                                },
                                 icon: Icon(
                                   Icons.share,
                                   color: AppColors.white,
